@@ -21,8 +21,23 @@ jobs:
           node-version: 22
 
       - name: Semantic Release
+        id: prerelease-version
         env:
           GITHUB_TOKEN: ${{ secrets.API_TOKEN_GITHUB }}
         run: |
           npm ci
           npx semantic-release --dry-run --branches ${{ github.ref_name }}
+          
+          if [[ -f ".VERSION" ]]; then
+            VERSION=$(cat .VERSION)
+          else
+            VERSION=$(jq -r '.version' package.json)
+          fi
+
+          echo "PRERELEASE_VERSION=$VERSION" >> "$GITHUB_OUTPUT"
+    
+      - name: get version
+        env:
+          PRERELEASE_VERSION: ${{ steps.prerelease-version.outputs.PRERELEASE_VERSION }}
+        run: |
+          echo "The new version is $PRERELEASE_VERSION"
