@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+GITHUB_BRANCH=$1
+
+npm ci
+npx semantic-release --dry-run --branches $GITHUB_BRANCH
+
+ls -la
+
+if [[ -f ".VERSION" ]]; then
+  VERSION=$(cat .VERSION)
+else
+  VERSION=$(jq -r '.version' package.json)
+fi
+
+echo "PRERELEASE_VERSION=$VERSION" >> "$GITHUB_OUTPUT"

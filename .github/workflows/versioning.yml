@@ -25,18 +25,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.API_TOKEN_GITHUB }}
         run: |
-          npm ci
-          npx semantic-release --dry-run --branches ${{ github.ref_name }}
-          
-          ls -la
-
-          if [[ -f ".VERSION" ]]; then
-            VERSION=$(cat .VERSION)
-          else
-            VERSION=$(jq -r '.version' package.json)
-          fi
-
-          echo "PRERELEASE_VERSION=$VERSION" >> "$GITHUB_OUTPUT"
+          ./scripts/generate-uat-version ${{ github.ref_name }}
     
       - name: get version
         env:
