@@ -1,0 +1,33 @@
+{
+  "name": "semantic-release-sample",
+  "version": "0.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "prepare": "husky",
+    "release": "semantic-release"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/booleancl/semantic-release-sample"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/booleancl/semantic-release-sample/issues"
+  },
+  "homepage": "https://github.com/booleancl/semantic-release-sample#readme",
+  "dependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/exec": "^7.1.0",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/npm": "^12.0.2",
+    "@semantic-release/release-notes-generator": "^14.0.3",
+    "husky": "^9.1.7",
+    "semantic-release": "^24.2.6"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "branches": [
+    { "name": "main" },
+    {
+      "name": "{feature,hotfix,bugfix}*"
+    }
+  ],
+  "plugins": [
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    "@semantic-release/npm",
+
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "package.json",
+          "backend-functions/functions/package.json",
+          "site/package.json",
+          "CHANGELOG.md"
+        ],
+        "message": "chore(release): ${nextRelease.version} [skip ci]"
+      }
+    ]
+  ]
+}
