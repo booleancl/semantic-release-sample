@@ -1,1 +1,1 @@
-# semantic-release-sample
+# Semantic Release sample
