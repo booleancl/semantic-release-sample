@@ -36,8 +36,7 @@ jobs:
           sudo mv htmlq /usr/local/bin/
           sudo chmod +x /usr/local/bin/htmlq
 
-          META_VERSION=$(curl -s "$https://booleancl.github.io/boolean-platform-site-uat/feature/add-brevo-marketing/" \
-            | htmlq --attribute content 'meta[name="version"]')
+          META_VERSION=$(curl -s "https://booleancl.github.io/boolean-platform-site-uat/feature/add-brevo-marketing/" | htmlq --attribute content 'meta[name="version"]')
 
           echo "ACTUAL VERSION: $META_VERSION"
 
