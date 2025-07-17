@@ -23,7 +23,7 @@ jobs:
       - name: Download and install htmlq
         env:
           HTMLQ_VERSION: v0.4.0
-          HTMLQ_PLATFORM: htmlq-x86_64-linux.tar.gz
+          HTMLQ_PLATFORM: x86_64-linux
         run: |
           set -e
           FILE="htmlq-${HTMLQ_PLATFORM}.tar.gz"
