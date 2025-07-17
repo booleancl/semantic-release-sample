@@ -20,9 +20,35 @@ jobs:
         with:
           node-version: 22
 
+      - name: Download and install htmlq
+        env:
+          HTMLQ_VERSION: v0.4.0
+          HTMLQ_PLATFORM: x86_64-linux
+        run: |
+          set -e
+          FILE="htmlq-${HTMLQ_PLATFORM}.tar.gz"
+          URL="https://github.com/mgdm/htmlq/releases/download/${HTMLQ_VERSION}/${FILE}"
+
+          echo "Downloading htmlq from $URL"
+          curl -sL "$URL" | tar xz
+
+          echo "Installing htmlq to /usr/local/bin"
+          sudo mv htmlq /usr/local/bin/
+          sudo chmod +x /usr/local/bin/htmlq
+
+          META_VERSION=$(curl -s "https://booleancl.github.io/boolean-platform-site-uat/feature/add-brevo-marketing/" | htmlq --attribute content 'meta[name="version"]')
+
+          echo "ACTUAL VERSION: $META_VERSION"
+
       - name: Semantic Release
+        id: prerelease-version
         env:
           GITHUB_TOKEN: ${{ secrets.API_TOKEN_GITHUB }}
         run: |
-          npm ci
-          npx semantic-release --dry-run --branches ${{ github.ref_name }}
+          ./scripts/generate-uat-version ${{ github.ref_name }}
+    
+      - name: get version
+        env:
+          PRERELEASE_VERSION: ${{ steps.prerelease-version.outputs.PRERELEASE_VERSION }}
+        run: |
+          echo "The new version is $PRERELEASE_VERSION"
